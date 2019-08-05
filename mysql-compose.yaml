@@ -1,0 +1,26 @@
+version: "3.2"
+
+services:
+  a:
+    image: mysql
+    networks:
+      - docknet
+    volumes:
+      - type: volume
+        source: vol_debug
+        target: /var/lib/mysql
+        volume:
+          nocopy: true
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+
+
+volumes:
+  vol_debug:
+    driver: local
+    driver_opts:
+      type: "nfs"
+      o: addr=192.168.1.115,nolock,soft,rw
+      device: ":/opt/nfs/volumes/mysql"
