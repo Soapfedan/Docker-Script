@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
  
 services:
  proxy:
@@ -17,6 +17,19 @@ services:
    ports:
     - "3306"
    env_file: .env
+ phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    depends_on:
+    - proxy
+    ports:
+    - "9191:80"
+    environment:
+      MYSQL_USER: proxyuser
+      MYSQL_PASSWORD: s3cret
+      MYSQL_ROOT_PASSWORD: s3cret
+      PMA_HOST: proxy
+    networks:
+    - front
 networks:
  Theistareykjarbunga:
   driver: overlay
