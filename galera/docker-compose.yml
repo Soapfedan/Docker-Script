@@ -81,7 +81,7 @@ services:
       MYSQL_PROXY_USER: proxyuser
       MYSQL_PROXY_PASSWORD: s3cr3TL33tPr0xyP@ssw0rd
       PMA_HOST: proxy
-      PMA_PORTS: 6032
+      PMA_PORT: 3306
     deploy:
       restart_policy:
         condition: on-failure
