@@ -68,25 +68,26 @@ services:
       # placement constraint - in this case on 'worker' nodes only
       placement:
         constraints: [node.role == worker]
-  #phpmyadmin:
-#    image: phpmyadmin/phpmyadmin
-#    depends_on:
-#    - proxy
-#    ports:
-#    - "9191:80"
-#    environment:
-#      MYSQL_USER: proxyuser
-#      MYSQL_PASSWORD: s3cr3TL33tP@ssw0rd
-#      MYSQL_ROOT_PASSWORD: s3cr3TL33tP@ssw0rd
-#      MYSQL_PROXY_USER: proxyuser
-#      MYSQL_PROXY_PASSWORD: s3cr3TL33tPr0xyP@ssw0rd
-#      PMA_HOST: proxy
-#    deploy:
-#      restart_policy:
-#        condition: on-failure
-#      placement:
-#        constraints:
-#          - node.role == manager
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    depends_on:
+    - proxy
+    ports:
+    - "9191:80"
+    environment:
+      MYSQL_USER: proxyuser
+      MYSQL_PASSWORD: s3cr3TL33tP@ssw0rd
+      MYSQL_ROOT_PASSWORD: s3cr3TL33tP@ssw0rd
+      MYSQL_PROXY_USER: proxyuser
+      MYSQL_PROXY_PASSWORD: s3cr3TL33tPr0xyP@ssw0rd
+      PMA_HOST: proxy
+      PMA_PORTS: 6032
+    deploy:
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints:
+          - node.role == manager
           
 networks:
   galera:
